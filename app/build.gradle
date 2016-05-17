@@ -35,6 +35,9 @@ kapt {
 dependencies {
     //automatically added dependencies when project was created
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile project(':repository-remote-retrofit')
+
     //Kotlin dependencies including Anko
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile 'org.jetbrains.anko:anko-support-v4:0.8.2'
@@ -57,9 +60,11 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
     //Networking dependencies
-//    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-//    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
-//    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
+    compile 'com.squareup.retrofit2:retrofit:2.0.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
 //    compile 'com.squareup.picasso:picasso:2.5.2'
     //Rx dependencies
     compile 'io.reactivex:rxandroid:1.1.0'
@@ -68,13 +73,4 @@ dependencies {
     androidTestCompile 'commons-io:commons-io:2.4'
     androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.0'
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
-    }
 }

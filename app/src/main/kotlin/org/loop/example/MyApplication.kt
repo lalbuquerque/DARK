@@ -2,6 +2,9 @@ package org.loop.example
 
 import android.app.Application
 import android.location.LocationManager
+import org.loop.example.di.component.ApplicationComponent
+import org.loop.example.di.module.ApplicationModule
+import org.loop.example.di.module.RemoteRetrofitModule
 import javax.inject.Inject
 
 
@@ -16,15 +19,12 @@ class MyApplication : Application() {
         @JvmStatic lateinit var graph: ApplicationComponent
     }
 
-    @Inject
-    lateinit var locationManager: LocationManager
-
     override fun onCreate() {
         super.onCreate()
-        graph = DaggerApplicationComponent.builder().androidModule(AndroidModule(this)).build()
+        graph = DaggerApplicationComponent.builder()
+                    .applicationModule(ApplicationModule(this))
+                    .remoteRetrofitModule(RemoteRetrofitModule(this))
+                    .build()
         graph.inject(this)
-
-        println("App: $locationManager")
-        //TODO do some other cool stuff here
     }
 }
