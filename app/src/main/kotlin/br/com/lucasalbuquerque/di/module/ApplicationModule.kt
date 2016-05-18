@@ -1,10 +1,10 @@
-package org.loop.example.di.module
+package br.com.lucasalbuquerque.di.module
 
 import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import org.loop.example.ForApplication
+import br.com.lucasalbuquerque.ForApplication
 import javax.inject.Singleton
 
 /**

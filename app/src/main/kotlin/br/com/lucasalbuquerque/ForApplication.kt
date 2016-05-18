@@ -1,4 +1,4 @@
-package org.loop.example
+package br.com.lucasalbuquerque
 
 import javax.inject.Qualifier
 

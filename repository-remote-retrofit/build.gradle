@@ -1,4 +1,9 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+def compileDependencies = rootProject.ext.dependencies
+def testDependencies = rootProject.ext.testDependencies
 
 android {
     compileSdkVersion 23
@@ -26,16 +31,15 @@ dependencies {
 
     compile project(':domain')
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile compileDependencies.kotlin_stdlib
 
     compile 'javax.inject:javax.inject:1'
 
-    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
-    compile 'com.squareup.retrofit:adapter-rxjava:2.0.0-beta2'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
+    compile compileDependencies.retrofit
+    compile compileDependencies.retrofit_converter_gson
+    compile compileDependencies.retrofit_rx_java
+    compile compileDependencies.okhttp
+    compile compileDependencies.okhttp3_logging_interceptor
 
-    provided 'org.glassfish:javax.annotation:10.0-b28'
-
-    testCompile 'junit:junit:4.12'
+    provided compileDependencies.jsr250
 }

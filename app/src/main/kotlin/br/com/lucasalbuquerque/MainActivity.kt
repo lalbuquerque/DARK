@@ -1,34 +1,21 @@
-package org.loop.example
+package br.com.lucasalbuquerque
 
-import android.location.LocationManager
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
-import javax.inject.Named
 
 class MainActivity : AppCompatActivity() {
 
     val TAG = MainActivity::class.java.name
-
-    @Inject
-    lateinit var locationManager: LocationManager
-
-    @field:[Inject Named("something")]
-    lateinit var something: String
-
-    @field:[Inject Named("somethingElse")]
-    lateinit var somethingElse: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         MyApplication.graph.inject(this)
         assert(textView != null)
-        Log.d(TAG, "$something and $somethingElse")
+//        Log.d(TAG, "$something and $somethingElse")
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

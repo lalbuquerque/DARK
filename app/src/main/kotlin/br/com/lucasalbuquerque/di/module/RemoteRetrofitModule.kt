@@ -1,4 +1,4 @@
-package org.loop.example.di.module
+package br.com.lucasalbuquerque.di.module
 
 import android.app.Application
 import br.com.lucasalbuquerque.domain.RemoteExchangeRepository

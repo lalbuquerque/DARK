@@ -1,11 +1,10 @@
-package org.loop.example
+package br.com.lucasalbuquerque
 
 import android.app.Application
-import android.location.LocationManager
-import org.loop.example.di.component.ApplicationComponent
-import org.loop.example.di.module.ApplicationModule
-import org.loop.example.di.module.RemoteRetrofitModule
-import javax.inject.Inject
+import br.com.lucasalbuquerque.di.component.ApplicationComponent
+import br.com.lucasalbuquerque.di.component.DaggerApplicationComponent
+import br.com.lucasalbuquerque.di.module.ApplicationModule
+import br.com.lucasalbuquerque.di.module.RemoteRetrofitModule
 
 
 /**
