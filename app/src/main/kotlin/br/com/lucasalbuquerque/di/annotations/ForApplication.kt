@@ -1,11 +1,6 @@
-package br.com.lucasalbuquerque
+package br.com.lucasalbuquerque.di.annotations
 
 import javax.inject.Qualifier
-
-
-/**
- * Created by loop on 09/12/14.
- */
 
 @Qualifier
 @Retention(AnnotationRetention.RUNTIME)

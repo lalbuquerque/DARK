@@ -32,6 +32,8 @@ dependencies {
     compile project(':domain')
 
     compile compileDependencies.kotlin_stdlib
+    compile compileDependencies.rxkotlin
+    compile compileDependencies.rxandroid
 
     compile 'javax.inject:javax.inject:1'
 

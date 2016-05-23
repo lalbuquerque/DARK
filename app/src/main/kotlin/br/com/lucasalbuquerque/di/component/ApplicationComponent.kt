@@ -1,19 +1,16 @@
 package br.com.lucasalbuquerque.di.component
 
-import dagger.Component
-import br.com.lucasalbuquerque.MainActivity
-import br.com.lucasalbuquerque.MyApplication
+import br.com.lucasalbuquerque.KardApplication
 import br.com.lucasalbuquerque.di.module.ApplicationModule
 import br.com.lucasalbuquerque.di.module.RemoteRetrofitModule
+import br.com.lucasalbuquerque.ui.activity.MainActivity
+import dagger.Component
 import javax.inject.Singleton
 
-/**
- * Created by loop on 14/12/14.
- */
 @Singleton
 @Component(modules = arrayOf(ApplicationModule::class, RemoteRetrofitModule::class))
 interface ApplicationComponent {
-    fun inject(application: MyApplication)
+    fun inject(application: KardApplication)
 
     fun inject(mainActivity: MainActivity)
 }

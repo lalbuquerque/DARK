@@ -1,10 +1,12 @@
 package br.com.lucasalbuquerque.di.module
 
 import android.app.Application
-import br.com.lucasalbuquerque.domain.RemoteExchangeRepository
+import br.com.lucasalbuquerque.domain.RemoteCharactersRepository
 import br.com.lucasalbuquerque.repository.remote.di.annotations.RemoteUri
-import br.com.lucasalbuquerque.repository.remote.retrofit.PublicApi
-import br.com.lucasalbuquerque.repository.remote.retrofit.repository.RemoteRetrofitExchangeRepository
+import br.com.lucasalbuquerque.repository.remote.retrofit.CharactersApi
+import br.com.lucasalbuquerque.repository.remote.retrofit.interceptor.RequestInterceptor
+import br.com.lucasalbuquerque.repository.remote.retrofit.repository.RemoteRetrofitCharactersRepository
+import br.com.lucasalbuquerque.repository.remote.util.MD5Util
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -14,6 +16,7 @@ import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 class RemoteRetrofitModule(private val application: Application) {
@@ -25,14 +28,28 @@ class RemoteRetrofitModule(private val application: Application) {
     }
 
     @Provides
-    @RemoteUri
-    fun provideRemoteUri(): String {
-        return "https://poloniex.com/"
+    fun provideRequestInterceptor(md5Util: MD5Util): RequestInterceptor {
+        val interceptor = RequestInterceptor(md5Util, "MARVEL_API_PUBLIC_KEY", "MARVEL_API_PRIVATE_KEY")
+        return interceptor;
     }
 
     @Provides
-    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
-        return OkHttpClient.Builder().addInterceptor(loggingInterceptor).build()
+    @RemoteUri
+    fun provideRemoteUri(): String {
+        return "http://gateway.marvel.com"
+    }
+
+    @Provides
+    fun provideMD5Util(): MD5Util {
+        return MD5Util()
+    }
+
+    @Provides
+    fun provideOkHttpClient(loggingInterceptor: HttpLoggingInterceptor, requestInterceptor: RequestInterceptor): OkHttpClient {
+        return OkHttpClient.Builder()
+                .addInterceptor(requestInterceptor)
+                .addInterceptor(loggingInterceptor)
+                .build()
     }
 
     @Provides
@@ -44,13 +61,25 @@ class RemoteRetrofitModule(private val application: Application) {
     }
 
     @Provides
-    fun providePublicApi(@RemoteUri remoteUri: String, okHttpClient: OkHttpClient, converterFactory: Converter.Factory): PublicApi {
-        return Retrofit.Builder().baseUrl(remoteUri).client(okHttpClient).addConverterFactory(converterFactory).addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build().create(PublicApi::class.java)
+    fun provideRetrofit(@RemoteUri remoteUri: String, okHttpClient: OkHttpClient, converterFactory: Converter.Factory): Retrofit {
+        return Retrofit.Builder().baseUrl(remoteUri)
+                .client(okHttpClient)
+                .addConverterFactory(converterFactory)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build()
     }
 
     @Provides
-    @br.com.lucasalbuquerque.repository.remote.di.annotations.Retrofit
-    fun provideRemoteRepository(publicApi: PublicApi): RemoteExchangeRepository {
-        return RemoteRetrofitExchangeRepository(publicApi)
+    fun provideCharactersApi(retrofit: Retrofit): CharactersApi {
+        return retrofit.create(CharactersApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    @br.com.lucasalbuquerque.repository.remote.di.annotations.Retrofit
+    fun provideRemoteCharactersRepository(charactersApi: CharactersApi): RemoteCharactersRepository {
+        val remoteCharactersRepository = RemoteRetrofitCharactersRepository(charactersApi)
+        return remoteCharactersRepository
+    }
+
 }

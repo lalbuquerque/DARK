@@ -2,9 +2,11 @@ package br.com.lucasalbuquerque.di.module
 
 import android.app.Application
 import android.content.Context
+import br.com.lucasalbuquerque.di.annotations.ForApplication
+import br.com.lucasalbuquerque.presenter.MainPresenter
+import br.com.lucasalbuquerque.presenter.MainPresenterImpl
 import dagger.Module
 import dagger.Provides
-import br.com.lucasalbuquerque.ForApplication
 import javax.inject.Singleton
 
 /**
@@ -18,8 +20,13 @@ class ApplicationModule(private val application: Application) {
      */
     @Provides
     @Singleton
-    @ForApplication
     fun provideApplicationContext(): Context {
         return application
+    }
+
+    @Provides
+    @Singleton
+    fun provideMainPresenter(mainPresenter: MainPresenterImpl): MainPresenter {
+        return mainPresenter
     }
 }

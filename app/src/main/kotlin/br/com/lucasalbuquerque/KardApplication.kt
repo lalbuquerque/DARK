@@ -6,12 +6,7 @@ import br.com.lucasalbuquerque.di.component.DaggerApplicationComponent
 import br.com.lucasalbuquerque.di.module.ApplicationModule
 import br.com.lucasalbuquerque.di.module.RemoteRetrofitModule
 
-
-/**
- * Created by loop on 09/12/14.
- */
-
-class MyApplication : Application() {
+class KardApplication : Application() {
 
     companion object {
         //platformStatic allow access it from java code

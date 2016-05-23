@@ -29,6 +29,9 @@ android {
     dexOptions {
         javaMaxHeapSize "2048M"
     }
+    lintOptions {
+        abortOnError false
+    }
 }
 
 kapt {
@@ -38,12 +41,22 @@ kapt {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
+    compile project(':domain')
     compile project(':repository-remote-retrofit')
 
     compile compileDependencies.kotlin_stdlib
+
     compile compileDependencies.anko_support
+    compile compileDependencies.anko_sdk
+    compile compileDependencies.anko_recyclerview
+    compile compileDependencies.anko_appcompat
+    compile compileDependencies.anko_design
+    compile compileDependencies.anko_cardview
 
     compile compileDependencies.support_v7
+    compile compileDependencies.recyclerView
+    compile compileDependencies.cardview
+    compile compileDependencies.support_design
 
     compile compileDependencies.dagger2
     kapt compileDependencies.dagger2_compiler
@@ -57,4 +70,6 @@ dependencies {
 
     compile compileDependencies.rxkotlin
     compile compileDependencies.rxandroid
+
+    compile compileDependencies.glide
 }
