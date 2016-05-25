@@ -5,13 +5,13 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import br.com.lucasalbuquerque.domain.MarvelCharacter
-import br.com.lucasalbuquerque.ui.layout.MainActivityUI
+import br.com.lucasalbuquerque.ui.layout.CharacterListItem
 import java.util.*
 
-class Adapter(val context: Context, val charactersList: ArrayList<MarvelCharacter> = ArrayList<MarvelCharacter>()) : RecyclerView.Adapter<Adapter.Holder>() {
+class CharactersListAdapter(val context: Context, val charactersList: ArrayList<MarvelCharacter> = ArrayList<MarvelCharacter>()) : RecyclerView.Adapter<CharactersListAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder? {
-        return Holder(MainActivityUI.CharacterListItem(context))
+        return Holder(CharacterListItem(context))
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
@@ -34,7 +34,7 @@ class Adapter(val context: Context, val charactersList: ArrayList<MarvelCharacte
 
     class Holder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(character: MarvelCharacter) {
-            (itemView as MainActivityUI.CharacterListItem).bind(character)
+            (itemView as CharacterListItem).bind(character)
         }
     }
 }
