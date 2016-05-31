@@ -8,13 +8,11 @@ import org.jetbrains.anko.setContentView
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-
-    val TAG = MainActivity::class.java.simpleName
-
     @Inject lateinit var ui: MainActivityUI
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         KardApplication.graph.inject(this)
 
         ui.setContentView(this)
