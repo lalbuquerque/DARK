@@ -15,6 +15,9 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        buildConfigField "String", "MARVEL_API_PUBLIC_KEY", "\"${getProps('marvelApi.key.public')}\""
+        buildConfigField "String", "MARVEL_API_PRIVATE_KEY", "\"${getProps('marvelApi.key.private')}\""
     }
     buildTypes {
         release {
@@ -36,6 +39,17 @@ android {
 
 kapt {
     generateStubs = true
+}
+
+def getProps(String propName) {
+    def propsFile = rootProject.file('local.properties')
+    if (propsFile.exists()) {
+        def props = new Properties()
+        props.load(new FileInputStream(propsFile))
+        return props[propName]
+    } else {
+        return "";
+    }
 }
 
 dependencies {

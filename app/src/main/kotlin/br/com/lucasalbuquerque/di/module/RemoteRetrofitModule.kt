@@ -1,6 +1,7 @@
 package br.com.lucasalbuquerque.di.module
 
 import android.app.Application
+import br.com.lucasalbuquerque.BuildConfig
 import br.com.lucasalbuquerque.domain.RemoteCharactersRepository
 import br.com.lucasalbuquerque.repository.remote.di.annotations.RemoteUri
 import br.com.lucasalbuquerque.repository.remote.retrofit.CharactersApi
@@ -29,7 +30,7 @@ class RemoteRetrofitModule(private val application: Application) {
 
     @Provides
     fun provideRequestInterceptor(md5Util: MD5Util): RequestInterceptor {
-        val interceptor = RequestInterceptor(md5Util, "MARVEL_API_PUBLIC_KEY", "MARVEL_API_PRIVATE_KEY")
+        val interceptor = RequestInterceptor(md5Util, BuildConfig.MARVEL_API_PUBLIC_KEY, BuildConfig.MARVEL_API_PRIVATE_KEY)
         return interceptor;
     }
 
