@@ -28,7 +28,7 @@ class CharacterListItem(context: Context) : CardView(context) {
                 image = imageView {
                     id = 1
                 }
-                image?.layoutParams = RelativeLayout.LayoutParams(-2, -2).apply {
+                image?.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
                     addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE)
                     addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE)
                     leftMargin = dip(8)
@@ -39,7 +39,7 @@ class CharacterListItem(context: Context) : CardView(context) {
                     id = 2
                     textColor = Color.DKGRAY
                 }
-                name?.layoutParams = RelativeLayout.LayoutParams(-2, -2).apply {
+                name?.layoutParams = RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
                     addRule(RelativeLayout.RIGHT_OF, 1)
                     addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE)
                     leftMargin = dip(8)
@@ -52,12 +52,14 @@ class CharacterListItem(context: Context) : CardView(context) {
 
     fun bind(character: MarvelCharacter) {
         name?.text = character.name
-        val img = character.thumbnail!!
+        image?.scaleType = ImageView.ScaleType.FIT_CENTER
+        val charImg = character.thumbnail!!
+
         Glide.with(context)
-                .load(img.path.plus(".").plus(img.extension))
-                .fitCenter()
+                .load(charImg.path.plus(".").plus(charImg.extension))
+                .centerCrop()
+                .override(100, 100)
                 .placeholder(R.drawable.progress_animation)
-                .crossFade()
-                .into(image);
+                .into(image)
     }
 }

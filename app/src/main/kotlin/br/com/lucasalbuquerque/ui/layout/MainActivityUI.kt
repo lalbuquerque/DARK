@@ -45,7 +45,6 @@ class MainActivityUI @Inject constructor(val mainPresenter: MainPresenter, val c
 
             appBarLayout {
                 toolbar {
-//                    id = R.id.toolbar
                     popupTheme = R.style.AppTheme_PopUpOverlay
                     backgroundResource = R.color.primary
                     title = "KARD"
@@ -80,6 +79,7 @@ class MainActivityUI @Inject constructor(val mainPresenter: MainPresenter, val c
                 }
 
                 charactersList = recyclerView {
+                    id = 2
                     val orientation = LinearLayoutManager.VERTICAL
                     layoutManager = LinearLayoutManager(context, orientation, true)
                     overScrollMode = View.OVER_SCROLL_NEVER
