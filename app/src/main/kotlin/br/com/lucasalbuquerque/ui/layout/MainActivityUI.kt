@@ -58,7 +58,7 @@ class MainActivityUI @Inject constructor(val mainPresenter: MainPresenter, val c
             }.lparams(width = matchParent)
 
             contentLayout = relativeLayout {
-                backgroundColor = R.color.marvel_red
+                backgroundColor = Color.WHITE
 
                 marvelIcon = imageView {
                     setImageResource(R.drawable.ic_marvel)
@@ -133,7 +133,6 @@ class MainActivityUI @Inject constructor(val mainPresenter: MainPresenter, val c
     override fun populateCharactersList(characters: List<MarvelCharacter>) {
         retrieveCharactersButton.visibility = View.GONE
         marvelIcon.visibility = View.GONE
-        contentLayout.backgroundColor = Color.WHITE
 
         val listAdapter = CharactersListAdapter(context, characters as ArrayList<MarvelCharacter>)
         charactersList.adapter = listAdapter
