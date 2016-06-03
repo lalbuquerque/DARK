@@ -22,7 +22,7 @@ class MainPresenterImpl @Inject constructor(@Retrofit val charactersRepository: 
         this.mainView = mainView
     }
 
-    override fun retrieveCharacters() {
+    override fun onRetrieveCharactersButtonClick() {
         mainView.showLoadingLayout()
         charactersRepository.retrieveAllCharacters()
                 .subscribeOn(Schedulers.io())
@@ -34,11 +34,11 @@ class MainPresenterImpl @Inject constructor(@Retrofit val charactersRepository: 
                         { t -> Log.e(TAG, t.message)
                             mainView.showErrorLayout()
                         },
-                        { Log.v("log", "completed") })
+                        { Log.v(TAG, "completed") })
     }
 
     fun hideLoadingAndShowCharactersList(characters: List<MarvelCharacter>) {
-        mainView.populateCharactersList(characters)
+        mainView.goToCharactersActivity(characters)
         mainView.hideLoadingLayout()
     }
 }
