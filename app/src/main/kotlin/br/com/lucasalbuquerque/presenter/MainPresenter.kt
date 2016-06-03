@@ -2,7 +2,7 @@ package br.com.lucasalbuquerque.presenter
 
 import br.com.lucasalbuquerque.ui.view.MainView
 
-interface  MainPresenter {
+interface MainPresenter {
     fun attachView(mainView: MainView)
-    fun onRetrieveCharactersButtonClick()
+    fun onCharactersButtonClick()
 }

@@ -7,8 +7,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.TypedValue
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import br.com.lucasalbuquerque.R
 import br.com.lucasalbuquerque.domain.MarvelCharacter
 import br.com.lucasalbuquerque.presenter.CharactersPresenter
@@ -24,12 +26,20 @@ import java.util.*
 import javax.inject.Inject
 
 class CharactersActivityUI @Inject constructor(val charactersPresenter: CharactersPresenter, val context: Context) : AnkoComponent<CharactersActivity>, CharactersView {
+    lateinit var ankoContext: AnkoContext<CharactersActivity>
 
     lateinit var contentLayout: RelativeLayout
     lateinit var charactersTitle: TextView
     lateinit var charactersList: RecyclerView
+    lateinit var loadingLayout: ProgressBar
+
+    init {
+        charactersPresenter.attachView(this)
+    }
 
     override fun createView(ui: AnkoContext<CharactersActivity>): View = with(ui) {
+        ankoContext = ui
+
         return coordinatorLayout {
             fitsSystemWindows = true
 
@@ -73,14 +83,38 @@ class CharactersActivityUI @Inject constructor(val charactersPresenter: Characte
                     topMargin = dip(8)
                 }
 
+                loadingLayout = progressBar {
+                    isIndeterminate = true
+                    visibility = View.GONE
+                }.lparams {
+                    centerInParent()
+                }
             }.lparams(width = matchParent, height = matchParent) {
                 behavior = AppBarLayout.ScrollingViewBehavior()
             }
+
+            charactersPresenter.retrieveCharacters()
         }
+    }
+
+    override fun showLoadingLayout() {
+        loadingLayout.visibility = View.VISIBLE
+        charactersList.visibility = View.GONE
+    }
+
+    override fun hideLoadingLayout() {
+        loadingLayout.visibility = View.GONE
+        charactersTitle.visibility = View.VISIBLE
+        charactersList.visibility = View.VISIBLE
     }
 
     override fun populateCharactersList(characters: List<MarvelCharacter>) {
         val listAdapter = CharactersListAdapter(context, characters as ArrayList<MarvelCharacter>)
         charactersList.adapter = listAdapter
+    }
+
+    override fun showErrorLayout() {
+        Toast.makeText(ankoContext.owner, "Something went wrong", Toast.LENGTH_LONG).show()
+        ankoContext.owner.finish()
     }
 }
