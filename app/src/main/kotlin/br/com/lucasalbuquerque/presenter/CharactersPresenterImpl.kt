@@ -20,7 +20,7 @@ class CharactersPresenterImpl @Inject constructor(@Retrofit val charactersReposi
         this.charactersView = charactersView
     }
 
-    override fun retrieveCharacters() {
+    override fun loadCharacters() {
         charactersRepository.retrieveAllCharacters()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

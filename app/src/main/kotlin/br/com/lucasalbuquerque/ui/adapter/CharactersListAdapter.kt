@@ -22,16 +22,6 @@ class CharactersListAdapter(val context: Context, val charactersList: ArrayList<
         return charactersList.size
     }
 
-    fun push(character: MarvelCharacter) {
-        charactersList.add(0, character)
-        notifyItemInserted(0)
-    }
-
-    fun pop() {
-        charactersList.remove(charactersList.last())
-        notifyItemRemoved(charactersList.size)
-    }
-
     class Holder(val view: View) : RecyclerView.ViewHolder(view) {
         fun bind(character: MarvelCharacter) {
             (itemView as CharacterListItem).bind(character)

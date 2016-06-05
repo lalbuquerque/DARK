@@ -41,11 +41,10 @@ class MainActivityUI @Inject constructor(val mainPresenter: MainPresenter) : Ank
                 }.lparams(width = matchParent) {
                     val tv = TypedValue()
                     if (ui.owner.theme.resolveAttribute(R.attr.actionBarSize, tv, true)) {
-                        height = TypedValue.complexToDimensionPixelSize(tv.data, resources.displayMetrics);
+                        height = TypedValue.complexToDimensionPixelSize(tv.data, resources.displayMetrics)
                     }
                 }
             }.lparams(width = matchParent)
-
             relativeLayout {
                 backgroundColor = Color.WHITE
 

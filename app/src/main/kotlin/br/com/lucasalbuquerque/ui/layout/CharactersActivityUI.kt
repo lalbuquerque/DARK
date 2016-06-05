@@ -93,7 +93,7 @@ class CharactersActivityUI @Inject constructor(val charactersPresenter: Characte
                 behavior = AppBarLayout.ScrollingViewBehavior()
             }
 
-            charactersPresenter.retrieveCharacters()
+            charactersPresenter.loadCharacters()
         }
     }
 
