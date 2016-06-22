@@ -1,4 +1,4 @@
-KARD : kotlin-anko-rx-dagger
+DARK : dagger2-anko-rx-kotlin
 =====================
 
 This project demonstrates a basic sample of an Android Project with Kotlin, Anko, Rx and Dagger 2.

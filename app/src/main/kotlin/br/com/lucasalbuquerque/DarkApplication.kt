@@ -6,7 +6,7 @@ import br.com.lucasalbuquerque.di.component.DaggerApplicationComponent
 import br.com.lucasalbuquerque.di.module.ApplicationModule
 import br.com.lucasalbuquerque.di.module.RemoteRetrofitModule
 
-class KardApplication : Application() {
+class DarkApplication : Application() {
 
     companion object {
         //platformStatic allow access it from java code
