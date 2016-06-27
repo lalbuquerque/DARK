@@ -12,7 +12,6 @@ class RemoteRetrofitCharactersRepository @Inject constructor(val charactersApi: 
 
     override fun retrieveAllCharacters(): Observable<List<MarvelCharacter>> {
         return charactersApi.getCharacters()
-                            .filter{ it.data != null }
                             .map{ it.data?.results }
     }
 }
