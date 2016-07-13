@@ -26,7 +26,7 @@ class CharactersPresenterImpl @Inject constructor(@Retrofit val charactersReposi
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { charactersView.showLoadingLayout() }
                 .flatMap { chars -> Observable.from(chars) }
-                .filter { char -> char.thumbnail!!.path != IMAGE_NOT_AVAILABLE }
+                .filter { char -> char.thumbnail?.path != IMAGE_NOT_AVAILABLE }
                 .toList()
                 .subscribe({ list ->  hideLoadingAndShowCharactersList(list) },
                         { t -> handleError(t)})
